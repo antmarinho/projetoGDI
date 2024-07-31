@@ -2,7 +2,7 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eer="eer" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation">
   <eer:Schema xmi:id="_Ne0FoE89Ee-LF8cCRJ55LQ">
     <nodes xmi:type="eer:Entity" xmi:id="_hwFmcE89Ee-LF8cCRJ55LQ" name="Heroi" AttributeLinkSource="_w8HH4E9BEe-LF8cCRJ55LQ" relationshipLink="_3ExFAE89Ee-LF8cCRJ55LQ __HN4gE89Ee-LF8cCRJ55LQ" isWeak="true"/>
-    <nodes xmi:type="eer:Entity" xmi:id="_kFeJcE89Ee-LF8cCRJ55LQ" name="Monstro" AttributeLinkSource="_IJl7IE9CEe-LF8cCRJ55LQ _Izl6YE9CEe-LF8cCRJ55LQ" relationshipLink="__zBOkE89Ee-LF8cCRJ55LQ"/>
+    <nodes xmi:type="eer:Entity" xmi:id="_kFeJcE89Ee-LF8cCRJ55LQ" name="Monstro" AttributeLinkSource="_IJl7IE9CEe-LF8cCRJ55LQ _Izl6YE9CEe-LF8cCRJ55LQ" relationshipLink="__zBOkE89Ee-LF8cCRJ55LQ _Dkl4YE9iEe-v0uA-Ez5trA"/>
     <nodes xmi:type="eer:Entity" xmi:id="_mQeocE89Ee-LF8cCRJ55LQ" name="Cidade" AttributeLinkSource="_AwLdkE9CEe-LF8cCRJ55LQ _BQBbQE9CEe-LF8cCRJ55LQ" relationshipLink="_AMamAE8-Ee-LF8cCRJ55LQ"/>
     <nodes xmi:type="eer:Relationship" xmi:id="_nu7jcE89Ee-LF8cCRJ55LQ" name="batalha" AttributeLinkSource="_lIKYsE9BEe-LF8cCRJ55LQ" relationshipLink="__HN4gE89Ee-LF8cCRJ55LQ __zBOkE89Ee-LF8cCRJ55LQ _AMamAE8-Ee-LF8cCRJ55LQ"/>
     <nodes xmi:type="eer:Entity" xmi:id="_qY52YE89Ee-LF8cCRJ55LQ" name="Associacao Herois" AttributeLinkSource="__BSIQE9AEe-LF8cCRJ55LQ __mwM0E9AEe-LF8cCRJ55LQ" relationshipLink="_2hvQcE89Ee-LF8cCRJ55LQ _qnI0wE8_Ee-LF8cCRJ55LQ _Lq6WsE9LEe-nCuMST31Cjg"/>
@@ -40,8 +40,8 @@
     <links xmi:type="eer:RelationshipLink" xmi:id="__HN4gE89Ee-LF8cCRJ55LQ" source="_hwFmcE89Ee-LF8cCRJ55LQ" target="_nu7jcE89Ee-LF8cCRJ55LQ" cardinality="MANY"/>
     <links xmi:type="eer:RelationshipLink" xmi:id="__zBOkE89Ee-LF8cCRJ55LQ" source="_kFeJcE89Ee-LF8cCRJ55LQ" target="_nu7jcE89Ee-LF8cCRJ55LQ" cardinality="MANY"/>
     <links xmi:type="eer:RelationshipLink" xmi:id="_AMamAE8-Ee-LF8cCRJ55LQ" source="_mQeocE89Ee-LF8cCRJ55LQ" target="_nu7jcE89Ee-LF8cCRJ55LQ"/>
-    <links xmi:type="eer:RelationshipLink" xmi:id="_0ZIIsE8-Ee-LF8cCRJ55LQ" source="_pCfAkE8-Ee-LF8cCRJ55LQ" target="_xdrEME8-Ee-LF8cCRJ55LQ" cardinality="MANY"/>
-    <links xmi:type="eer:RelationshipLink" xmi:id="_1ILAAE8-Ee-LF8cCRJ55LQ" source="_ydZb0E8-Ee-LF8cCRJ55LQ" target="_xdrEME8-Ee-LF8cCRJ55LQ" cardinality="MANY"/>
+    <links xmi:type="eer:RelationshipLink" xmi:id="_0ZIIsE8-Ee-LF8cCRJ55LQ" source="_pCfAkE8-Ee-LF8cCRJ55LQ" target="_xdrEME8-Ee-LF8cCRJ55LQ"/>
+    <links xmi:type="eer:RelationshipLink" xmi:id="_1ILAAE8-Ee-LF8cCRJ55LQ" source="_ydZb0E8-Ee-LF8cCRJ55LQ" target="_xdrEME8-Ee-LF8cCRJ55LQ"/>
     <links xmi:type="eer:RelationshipLink" xmi:id="_qnI0wE8_Ee-LF8cCRJ55LQ" source="_qY52YE89Ee-LF8cCRJ55LQ" target="_kTBLUE8_Ee-LF8cCRJ55LQ"/>
     <links xmi:type="eer:CategorySL" xmi:id="_AFcwcE9AEe-LF8cCRJ55LQ" source="_XVzuAE8_Ee-LF8cCRJ55LQ"/>
     <links xmi:type="eer:CategoryGL" xmi:id="_K3kPME9AEe-LF8cCRJ55LQ" source="_KjAJ4E8_Ee-LF8cCRJ55LQ"/>
@@ -70,6 +70,7 @@
     <links xmi:type="eer:RelationshipLink" xmi:id="_PjrYAE9LEe-nCuMST31Cjg" source="_TmlqQE8_Ee-LF8cCRJ55LQ" target="_rXJK0E8-Ee-LF8cCRJ55LQ" cardinality="MANY"/>
     <links xmi:type="eer:RelationshipLink" xmi:id="_pYoCIE9eEe-6B55bacBpTQ" source="_TmlqQE8_Ee-LF8cCRJ55LQ" target="_k0w1YE9eEe-6B55bacBpTQ" role="diretor"/>
     <links xmi:type="eer:RelationshipLink" xmi:id="_qhUvkE9eEe-6B55bacBpTQ" source="_TmlqQE8_Ee-LF8cCRJ55LQ" target="_k0w1YE9eEe-6B55bacBpTQ" cardinality="MANY" role="subordinado"/>
+    <links xmi:type="eer:RelationshipLink" xmi:id="_Dkl4YE9iEe-v0uA-Ez5trA" source="_kFeJcE89Ee-LF8cCRJ55LQ" role="perdedor"/>
   </eer:Schema>
   <notation:Diagram xmi:id="_NfMgIE89Ee-LF8cCRJ55LQ" type="Eer" element="_Ne0FoE89Ee-LF8cCRJ55LQ" name="ModeloER.eer" measurementUnit="Pixel">
     <children xmi:type="notation:Node" xmi:id="_hwGNgE89Ee-LF8cCRJ55LQ" type="2001" element="_hwFmcE89Ee-LF8cCRJ55LQ">
