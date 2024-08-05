@@ -83,7 +83,7 @@ CREATE TABLE pessoaFone(
 CREATE TABLE civil(
 
 	cpf VARCHAR(11),
-	CONSTRAINT PK_cpf_civil PRIMARY KEY(cpf),
+	CONSTRAINT PK_civil PRIMARY KEY(cpf),
 	CONSTRAINT FK_cpf_civil FOREIGN KEY(cpf) REFERENCES pessoa(cpf)
 
 );
@@ -96,10 +96,42 @@ CREATE TABLE executivo(
 	cpf VARCHAR(11),
 	cargo VARCHAR(15) NOT NULL,
 	codAH VARCHAR(5) NOT NULL,
-	codSup VARCHAR(5) NOT NULL,
-	CONSTRAINT PK_cpf_exe PRIMARY KEY(cpf),
+	codSup VARCHAR(5),
+	CONSTRAINT PK_exe PRIMARY KEY(cpf),
 	CONSTRAINT FK_cpf_exe FOREIGN KEY(cpf) REFERENCES pessoa(cpf),
 	CONSTRAINT FK_codAH_exe FOREIGN KEY(codAH) REFERENCES assHeroi(codAH),
 	CONSTRAINT FK_codSup_exe FOREIGN KEY(codSup) REFERENCES executivo(cpf)
+
+);
+
+
+-- CRIA TABELA RELACAO PAGA SALARIO BONUS ENTIDADE ASSOCIATIVA
+
+CREATE TABLE pagaSalarioBonus(
+
+	cpf VARCHAR(11),
+	codAH VARCHAR(5) NOT NULL,
+	codB VARCHAR(5),
+	CONSTRAINT PK_pagaSalb PRIMARY KEY(cpf,codAH),
+	CONSTRAINT FK_codAH_psb FOREIGN KEY(codAH) REFERENCES assHeroi(codAH),
+	CONSTRAINT FK_cpf_psb FOREIGN KEY(cpf) REFERENCES executivo(cpf),
+	CONSTRAINT FK_codB_psb FOREIGN KEY(codB) REFERENCES bonus(codB)
+
+);
+
+
+-- CRIA TABELA RELACAO BATALHA
+
+CREATE TABLE batalha(
+
+	codM VARCHAR(5),
+	codAH VARCHAR(5),
+	nomeH VARCHAR(25),
+	dataBatalha DATE,
+	codC VARCHAR(5) CONSTRAINT nome_cidade_bat NOT NULL,
+	CONSTRAINT PK_batalha PRIMARY KEY(codM,codAH,nomeH,dataBatalha),
+	CONSTRAINT FK_codM_bat FOREIGN KEY(codM) REFERENCES monstro(codM),
+	CONSTRAINT FK_heroi_bat FOREIGN KEY(codAH,nomeH) REFERENCES heroi(codAH,nomeH),
+	CONSTRAINT FK_codC_bat FOREIGN KEY(codC) REFERENCES cidade(codC)
 
 );
