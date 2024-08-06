@@ -27,7 +27,3 @@ Auxiliar o aprendizado dos conceitos abordados na disciplina ao aplicá-los de f
 
 ## 🌎 Descrição do minimundo
 One punch man é um anime onde o protagonista chamado "Saitama" derrota qualquer vilão com um soco...
-
-![Static Badge](https://img.shields.io/badge/Miro%20-%20yellow?logo=miro&logoColor=black)
-
-https://miro.com/app/board/uXjVKGbldRs=/
