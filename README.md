@@ -19,6 +19,7 @@
 - *Jhonatan Kennedy*
 - *Marina Melo*
 - *Michael Felipe*
+- *Giovanna Silva*
 
 ## ✔️ Objetivo do projeto
 Auxiliar o aprendizado dos conceitos abordados na disciplina ao aplicá-los de forma prática.
