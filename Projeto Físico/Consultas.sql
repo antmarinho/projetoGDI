@@ -13,7 +13,7 @@ GROUP BY
     h.codAH, 
     h.nomeH
 HAVING 
-    COUNT(b.codM) > 2;
+    COUNT(b.codM) > 1;
 
 
 --JUNÇÃO INTERNA
