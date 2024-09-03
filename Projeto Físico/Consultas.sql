@@ -15,7 +15,15 @@ GROUP BY
 HAVING 
     COUNT(b.codM) > 1;
 
+-- quantidade de heroi nos Rank S e sem rank
 
+SELECT h.rankh, COUNT(h.rankh) AS QTDHeroi
+FROM heroi h
+GROUP BY h.rankh
+HAVING h.rankh IN ('S', 'N')
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
 --JUNÇÃO INTERNA
 
 -- Todos os nomes dos heróis e o nome dos monstros que enfrentaram
@@ -30,6 +38,14 @@ INNER JOIN
 INNER JOIN 
     monstro m ON b.codM = m.codM;
 
+-- nome dos executivos com o numero de telefone igual a 111-789-852 e 111-785-200
+
+SELECT p.nome
+FROM pessoa p INNER JOIN pessoafone f ON p.cpf = f.cpf
+WHERE f.fone IN ('111-789-852','111-785-200') 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 --JUNÇÃO EXTERNA
 
 --  todos os heróis e as batalhas em que participaram, mostrando também heróis que não participaram de nenhuma batalha 
@@ -41,6 +57,14 @@ FROM
     heroi h
 LEFT JOIN 
     batalha b ON h.codAH = b.codAH AND h.nomeH = b.nomeH;
+
+-- nome dos executivos q n recebe bonus
+
+SELECT p.nome
+FROM executivo e RIGHT JOIN pagasalariobonus b ON e.cpf = b.cpf INNER JOIN pessoa p ON p.cpf = e.cpf
+WHERE b.codb IS NULL
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --SEMI JOIN
 
@@ -57,6 +81,8 @@ WHERE
         WHERE h.codAH = b.codAH AND h.nomeH = b.nomeH
     );
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 --ANTI-JOIN
 
 --heróis que não participaram de  nenhuma batalha
@@ -70,6 +96,8 @@ WHERE
         SELECT b.codAH, b.nomeH
         FROM batalha b
     );
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --SUBCONSULTA ESCALAR
 
@@ -85,6 +113,16 @@ WHERE
      WHERE c.codC = b.codC
     ) < 2;
 
+-- mostra o codigo dos bonus q sao maior q a media dos bonus
+
+SELECT b.codb 
+FROM bonus b
+WHERE b.valor >
+	(SELECT AVG(b.valor)
+     FROM bonus b)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 --SUBCONSULTA LINHA
 
 --Pessoas que moram na mesma cidade que Shizuka
@@ -96,6 +134,8 @@ FROM
 JOIN pessoa p2 ON p1.end_cep = p2.end_cep
 WHERE 
     p1.nome = 'Shizuka';
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --SUBCONSULTA TABELA
 
@@ -117,6 +157,16 @@ LEFT JOIN (
         cpf
 ) b ON e.cpf = b.cpf;
 
+-- cpf dos lideres de associacao q os herois batalharam
+
+SELECT e.cpf
+FROM executivo e
+WHERE e.codah IN 
+    (SELECT b.codah 
+	 FROM heroi h LEFT JOIN batalha b ON b.nomeh = h.nomeh
+	 WHERE b.codah IS NOT NULL) AND e.cargo = 'Lider'
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --OPERAÇÃO DE CONJUNTO
 
@@ -131,4 +181,43 @@ SELECT
     nome AS nome
 FROM 
     monstro;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- PL/SQL
+
+-- procedimento q imprime os herois de acordo com o codico da associacao passado por paramentro
+
+CREATE OR REPLACE PROCEDURE procuraHeroiPelaAsso (cod VARCHAR) IS
+
+    CURSOR buscar IS
+	
+    	SELECT 	h.nomeh
+    	FROM heroi h INNER JOIN assheroi a ON a.codah = h.codah
+		WHERE a.codah = cod;
+    
+    nome heroi.nomeh%TYPE;
+
+BEGIN 
+
+    OPEN buscar;
+
+	LOOP
+
+		FETCH buscar INTO nome;
+		EXIT WHEN buscar%NOTFOUND;
+		
+        dbms_output.put_line('Heroi - ' || nome);
+		
+    END LOOP;
+
+	CLOSE buscar;
+
+END;
+
+BEGIN
+
+    procuraHeroiPelaAsso('22222');
+	
+END;
 
