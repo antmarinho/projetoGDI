@@ -166,6 +166,33 @@ WHERE e.codah IN
 	 FROM heroi h LEFT OUTER JOIN batalha b ON b.nomeh = h.nomeh
 	 WHERE b.codah IS NOT NULL) AND e.cargo = 'Lider'
 
+-- Monstros que batalharam contra heróis de rank S
+
+SELECT nome  
+FROM monstro  
+WHERE codM IN ( 
+    SELECT codM  
+    FROM batalha  
+    WHERE (codAH, nomeH) IN ( 
+        SELECT codAH, nomeH 
+        FROM heroi  
+        WHERE rankH = 'S' 
+    ) 
+)
+
+-- Cidades em que os Heróis de Rank A Batalharam
+
+SELECT c.nome 
+FROM cidade c 
+INNER JOIN batalha b ON c.codC = b.codC 
+INNER JOIN heroi h ON b.codAH = h.codAH 
+WHERE h.rankH = 'A' 
+GROUP BY c.nome 
+HAVING COUNT(DISTINCT h.codAH) = ( 
+    SELECT COUNT(DISTINCT h2.codAH) 
+    FROM heroi h2 
+    WHERE h2.rankH = 'A' 
+)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --OPERAÇÃO DE CONJUNTO
@@ -232,4 +259,21 @@ BEGIN
     JOIN bonus b ON psb.codB = b.codB
     WHERE psb.cpf = cpf_param;
     RETURN total;
+END;
+
+-- Função que verifica se um CPF é de um civil de acordo com o parâmetro p_cpf
+
+CREATE OR REPLACE FUNCTION verificar_civil(p_cpf VARCHAR2) 
+RETURN BOOLEAN 
+IS
+    v_count INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM civil
+    WHERE cpf = p_cpf;
+    
+    RETURN v_count > 0;
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN FALSE;
 END;
