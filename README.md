@@ -16,9 +16,6 @@
 - *Antônio Marinho*
 - *Alberto Marques*
 - *João Victor Nobre*
-- *Jhonatan Kennedy*
-- *Marina Melo*
-- *Michael Felipe*
 - *Giovanna Silva*
 
 ## ✔️ Objetivo do projeto
