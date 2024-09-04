@@ -55,13 +55,13 @@ SELECT
     b.codM AS monstro_cod
 FROM 
     heroi h
-LEFT JOIN 
+LEFT OUTER JOIN 
     batalha b ON h.codAH = b.codAH AND h.nomeH = b.nomeH;
 
 -- nome dos executivos q n recebe bonus
 
 SELECT p.nome
-FROM executivo e RIGHT JOIN pagasalariobonus b ON e.cpf = b.cpf INNER JOIN pessoa p ON p.cpf = e.cpf
+FROM executivo e RIGHT OUTER JOIN pagasalariobonus b ON e.cpf = b.cpf INNER JOIN pessoa p ON p.cpf = e.cpf
 WHERE b.codb IS NULL
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ SELECT
     p2.nome
 FROM 
     pessoa p1
-JOIN pessoa p2 ON p1.end_cep = p2.end_cep
+INNER JOIN pessoa p2 ON p1.end_cep = p2.end_cep
 WHERE 
     p1.nome = 'Shizuka';
 
@@ -147,7 +147,7 @@ SELECT
     b.num_bonus
 FROM 
     executivo e
-LEFT JOIN (
+LEFT OUTER JOIN (
     SELECT 
         cpf, 
         COUNT(*) AS num_bonus
@@ -163,7 +163,7 @@ SELECT e.cpf
 FROM executivo e
 WHERE e.codah IN 
     (SELECT b.codah 
-	 FROM heroi h LEFT JOIN batalha b ON b.nomeh = h.nomeh
+	 FROM heroi h LEFT OUTER JOIN batalha b ON b.nomeh = h.nomeh
 	 WHERE b.codah IS NOT NULL) AND e.cargo = 'Lider'
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -221,3 +221,15 @@ BEGIN
 	
 END;
 
+--Função com Parâmetro: retorna o total de bônus para um executivo com base no cpf_param fornecido.
+
+CREATE FUNCTION total_bonus(cpf_param VARCHAR(11))
+RETURNS NUMBER
+BEGIN
+    DECLARE total NUMBER;
+    SELECT SUM(b.valor) INTO total
+    FROM pagaSalarioBonus psb
+    JOIN bonus b ON psb.codB = b.codB
+    WHERE psb.cpf = cpf_param;
+    RETURN total;
+END;
