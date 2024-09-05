@@ -277,3 +277,33 @@ EXCEPTION
     WHEN OTHERS THEN
         RETURN FALSE;
 END;
+
+-- Procedimento que lista todas as batalhas de um herói específico.
+
+CREATE OR REPLACE PROCEDURE listar_batalhas_heroi(
+    p_nomeH batalha.nomeH%TYPE
+) 
+IS
+BEGIN
+    FOR rec IN (
+        SELECT 
+            b.codM,
+            m.nome AS Nome_Monstro,
+            b.dataBatalha,
+            c.nome AS Nome_Cidade
+        FROM 
+            batalha b
+        JOIN 
+            monstro m ON b.codM = m.codM
+        JOIN 
+            cidade c ON b.codC = c.codC
+        WHERE 
+            b.nomeH = p_nomeH
+        ORDER BY 
+            b.dataBatalha DESC
+    ) 
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('Monstro: ' || rec.Nome_Monstro || 
+                             ', Data: ' || TO_CHAR(rec.dataBatalha, 'DD-MM-YYYY') || 
+                             ', Cidade: ' || rec.Nome_Cidade);
+    END LOOP;
